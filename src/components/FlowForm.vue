@@ -307,7 +307,7 @@
               descriptionLink: LinkOption
             }
 
-            const defaultSlot = this.$slots.default()
+            const defaultSlot = this.$slots.default && this.$slots.default()
             let children = null
 
             if (defaultSlot && defaultSlot.length) {
@@ -319,7 +319,7 @@
 
             if (children) {
               children
-                .filter(q => q.type && q.type.name.indexOf('Question') !== -1)
+                .filter(q => q.type && typeof q.type === 'object' && q.type.name.indexOf('Question') !== -1)
                 .forEach(q => {
                   const props = q.props
                   const componentInstance = this.getInstance(props.id)
